@@ -77,7 +77,7 @@
         <h2>Mastermind Game - Level <span id="current-level">1</span></h2>
         <div class="instructions">
             <p>Enter your guess using the following letters:</p>
-            <p>R (Red), B (Blue), G (Green), Y (Yellow), P (Purple), O (Orange)</p>
+            <p>R (Red), B (Blue), G (Green), Y (Yellow), P (Purple), O (Orange), W(White)</p>
         </div>
         <div class="guess-input">
             <input type="text" class="input-box" maxlength="1" data-index="0">
@@ -101,6 +101,7 @@
     <div id="final-page" class="hidden">
         <h1>WooHoo! You've completed all levels!</h1>
         <p>Thank you for participating in our study!</p>
+        <p>Please download the data and send it to us. You are the best!</p>
         <button onclick="downloadData()">Download Data</button>
     </div>
 
@@ -109,7 +110,7 @@
         <div class="modal-content">
             <h2>How to Play Mastermind</h2>
             <p>1. Try to guess the hidden 4-color code</p>
-            <p>2. Use these colors: R (Red), B (Blue), G (Green), Y (Yellow), P (Purple), O (Orange)</p>
+            <p>2. Use these colors: R (Red), B (Blue), G (Green), Y (Yellow), P (Purple), O (Orange), W(White)</p>
             <p>3. After each guess, you'll receive feedback:</p>
             <p>- Exact matches: Right color in right position</p>
             <p>- Color matches: Right color in wrong position</p>
@@ -132,7 +133,8 @@
             'G': '#00ff00',
             'Y': '#ffff00',
             'P': '#800080',
-            'O': '#ffa500'
+            'O': '#ffa500',
+            'W': '#ffffff'
         };
 
         let gameState = {
