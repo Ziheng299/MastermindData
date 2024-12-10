@@ -201,7 +201,7 @@
             const color = COLORS[input.value];
             if (color) {
                 input.style.backgroundColor = color;
-                input.style.color = input.value === 'Y' ? '#000' : '#fff';
+                input.style.color = (input.value === 'Y' || input.value === 'W') ? '#000' : '#fff';
             } else {
                 input.style.backgroundColor = '#fff';
                 input.style.color = '#000';
@@ -282,7 +282,7 @@
             row.className = 'guess-row';
             row.innerHTML = `
                 Guess: ${guess.split('').map(c => 
-                    `<span class="color-box" style="background:${COLORS[c]};color:${c === 'Y' ? '#000' : '#fff'}">${c}</span>`
+                    `<span class="color-box" style="background:${COLORS[c]};color:${(c === 'Y' || c === 'W') ? '#000' : '#fff'}">${c}</span>`
                 ).join('')}
                 | Exact: ${feedback.exactMatches}
                 | Color: ${feedback.colorMatches}
