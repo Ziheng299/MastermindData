@@ -78,6 +78,7 @@
         <div class="instructions">
             <p>Enter your guess using the following letters:</p>
             <p>R (Red), B (Blue), G (Green), Y (Yellow), P (Purple), O (Orange), W(White)</p>
+            <p>There could be duplicated colors entered</p>
         </div>
         <div class="guess-input">
             <input type="text" class="input-box" maxlength="1" data-index="0">
@@ -111,9 +112,15 @@
             <h2>How to Play Mastermind</h2>
             <p>1. Try to guess the hidden 4-color code</p>
             <p>2. Use these colors: R (Red), B (Blue), G (Green), Y (Yellow), P (Purple), O (Orange), W(White)</p>
-            <p>3. After each guess, you'll receive feedback:</p>
-            <p>- Exact matches: Right color in right position</p>
-            <p>- Color matches: Right color in wrong position</p>
+            <p>3. You have to guess the correct number as fast as you can.</p>
+            <p>4. The color codes can contain repetitions.</p>
+            <p>5. After each guess, you'll receive feedback:</p>
+            <p>- Exact matches: The number of correct colors in the Right position</p>
+            <p>- Color matches: The number of correct colors in the Wrong position</p>
+            <p>6. Carefully choose your strategy. Avoid brute force.</p>
+            <p>7. Use the following format:</p>
+            <p>- THOUGHT: think about your guess</p>
+            <p>- ACTION: only your guessed color without additional info.</p>
             <button onclick="closeInstructions()">Close</button>
         </div>
     </div>
@@ -121,10 +128,10 @@
     <script>
         // Game configuration
         const CODES = {
-            'A': ['RGBY', 'YOBP', 'GGRP', 'BORP', 'YYGO', 'RPBB', 'OGGR', 'PBYR', 'OOYP', 'BGYB'],
-            'B': ['GGRP', 'YYGO', 'OGGR', 'OOYP', 'RGBY', 'YOBP', 'BORP', 'RPBB', 'PBYR', 'BGYB'],
-            'C': ['YOBP', 'BORP', 'RPBB', 'PBYR', 'BGYB', 'RGBY', 'GGRP', 'YYGO', 'OGGR', 'OOYP'],
-            'D': ['OOYP', 'BGYB', 'RGBY', 'YYGO', 'PBYR', 'GGRP', 'YOBP', 'OGGR', 'BORP', 'RPBB']
+            'A': ['RGBY', 'YWOP', 'GGRP', 'BWRP', 'PRRP', 'RPWB', 'GGGG', 'PBYR', 'OWOW', 'BGWP'],
+            'B': ['PPPP', 'GGRP', 'BWRP', 'PRRP', 'RGBY', 'BGWP', 'OWOW', 'RPWB', 'YWOP', 'PBYR'],
+            'C': ['YWOP', 'BGWP', 'RPWB', 'PRRP', 'PBYR', 'RGBY', 'GGRP', 'BWRP', 'OWOW', 'BBBB'],
+            'D': ['OWOW', 'RPWB', 'RGBY', 'YYYY', 'PRRP', 'YWOP', 'BGWP', 'GGRP', 'BWRP', 'PBYR']
         };
 
         const COLORS = {
@@ -206,8 +213,8 @@
             const inputs = document.querySelectorAll('.input-box');
             const guess = Array.from(inputs).map(input => input.value).join('');
             
-            if (guess.length !== 4 || !guess.split('').every(c => 'RBGYPO'.includes(c))) {
-                alert('Please enter a valid guess using R, B, G, Y, P, O');
+            if (guess.length !== 4 || !guess.split('').every(c => 'RBGYPOW'.includes(c))) {
+                alert('Please enter a valid guess using R, B, G, Y, P, O, W');
                 return;
             }
 
