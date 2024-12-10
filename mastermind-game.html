@@ -282,8 +282,24 @@
         // Update guess history
         function updateHistory(guess, feedback) {
             const history = document.querySelector('.guess-history');
+            
+            // Clear any duplicate entries that might exist
+            const existingEntries = history.querySelectorAll('.guess-row');
+            existingEntries.forEach(entry => {
+                const entryGuess = entry.getAttribute('data-guess');
+                const entryTimestamp = entry.getAttribute('data-timestamp');
+                if (entryGuess === guess && entryTimestamp === gameState.attempts[gameState.attempts.length - 1].timestamp) {
+                    history.removeChild(entry);
+                }
+            });
+        
+            // Create new history entry
             const row = document.createElement('div');
             row.className = 'guess-row';
+            // Store the guess and timestamp as data attributes for duplicate checking
+            row.setAttribute('data-guess', guess);
+            row.setAttribute('data-timestamp', gameState.attempts[gameState.attempts.length - 1].timestamp);
+            
             row.innerHTML = `
                 Guess: ${guess.split('').map(c => 
                     `<span class="color-box" style="background:${COLORS[c]};color:${(c === 'Y' || c === 'W') ? '#000' : '#fff'}">${c}</span>`
