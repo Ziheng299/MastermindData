@@ -121,6 +121,7 @@
             <p>7. Use the following format:</p>
             <p>- THOUGHT: think about your guess</p>
             <p>- ACTION: only your guessed color without additional info.</p>
+            <p>8. There will be 10 levels in total.</p>
             <button onclick="closeInstructions()">Close</button>
         </div>
     </div>
@@ -217,12 +218,12 @@
                 alert('Please enter a valid guess using R, B, G, Y, P, O, W');
                 return;
             }
-
+        
             const targetCode = CODES[gameState.group][gameState.level - 1];
             const feedback = checkGuess(guess, targetCode);
             
-            // Record attempt
-            gameState.attempts.push({
+            // Record attempt only once
+            const attempt = {
                 username: gameState.username,
                 group: gameState.group,
                 level: gameState.level,
@@ -230,13 +231,16 @@
                 guess: guess,
                 colorMatches: feedback.colorMatches,
                 exactMatches: feedback.exactMatches
-            });
-
+            };
+            
+            gameState.attempts.push(attempt);
+        
             // Update history
             updateHistory(guess, feedback);
-
+        
             // Check if solved
             if (feedback.exactMatches === 4) {
+                // Move to next page without recording duplicate attempts
                 if (gameState.level === 10) {
                     showFinalPage();
                 } else {
